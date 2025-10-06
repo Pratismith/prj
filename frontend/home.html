@@ -67,19 +67,35 @@
         <!-- Popup Modal for Advanced Search -->
         <div id="searchModal" class="modal">
           <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" id="closeSearch">&times;</span>
             <h2>Search Properties</h2>
         
             <form id="searchForm">
-              <label for="searchInput">City, Area, or Property Name </label>
-              <input type="text" id="searchInput" placeholder="City, Area, or Property Name" required>
+              <label for="locationFilter">Location</label>
+              <select id="locationFilter">
+                <option value="">All Locations</option>
+                <option value="bangalore">Bangalore</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="delhi">Delhi</option>
+                <option value="pune">Pune</option>
+                <option value="hyderabad">Hyderabad</option>
+                <option value="chennai">Chennai</option>
+                <option value="kolkata">Kolkata</option>
+                <option value="ahmedabad">Ahmedabad</option>
+              </select>
+
+              <label for="searchInput">Search (City, Area, or Property Name)</label>
+              <input type="text" id="searchInput" placeholder="Enter city, area, or property name...">
         
               <label for="propertyType">Property Type</label>
               <select id="propertyType">
-                <option value="any">Any</option>
-                <option value="pg">PG's</option>
-                <option value="apartment">Rental Apartment</option>
-                <option value="villa">Homestay's</option>
+                <option value="">Any</option>
+                <option value="apartment">Apartment</option>
+                <option value="house">House</option>
+                <option value="studio">Studio</option>
+                <option value="homestay">Homestay</option>
+                <option value="pg">PG</option>
+                <option value="villa">Villa</option>
               </select>
         
               <button type="submit" class="btn-gradient">Search</button>

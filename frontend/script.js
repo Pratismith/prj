@@ -38,10 +38,10 @@ function renderProperties(data) {
 
     card.innerHTML = `
       <div class="card-img">
-      <img src="${p.images && p.images.length > 0 ? p.images[0] : "https://via.placeholder.com/600x400"}" alt="${p.title}">
+      <img src="${p.images && p.images.length > 0 ? p.images[0] : "https://via.placeholder.com/600x400"}" alt="${p.title}" loading="lazy">
         <span class="property-type">${p.type || "Property"}</span>
         <span class="price-badge ${p.verified ? "verified" : ""}">
-          ${p.verified ? "✔ Verified " : ""}${p.price}
+          ${p.verified ? "✔ " : ""}₹${p.price ? p.price.toLocaleString('en-IN') : 'N/A'}/mo
         </span>
       </div>
       <div class="card-body">
@@ -106,24 +106,31 @@ if (closeSearch) {
 }
 
 // Handle form submit
+const searchForm = document.getElementById("searchForm");
 if (searchForm) {
   searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const cityArea = document.getElementById("searchInput").value.toLowerCase();
+    const locationFilter = document.getElementById("locationFilter").value.toLowerCase();
+    const searchText = document.getElementById("searchInput").value.toLowerCase();
     const propertyType = document.getElementById("propertyType").value.toLowerCase();
 
     // Filter logic on fetched properties
     const filtered = allProperties.filter(p => {
-      const matchesText =
-        (p.location && p.location.toLowerCase().includes(cityArea)) ||
-        (p.title && p.title.toLowerCase().includes(cityArea));
+      const matchesLocation = locationFilter
+        ? (p.location && p.location.toLowerCase().includes(locationFilter))
+        : true;
+
+      const matchesText = searchText
+        ? (p.location && p.location.toLowerCase().includes(searchText)) ||
+          (p.title && p.title.toLowerCase().includes(searchText))
+        : true;
 
       const matchesType = propertyType
         ? (p.type && p.type.toLowerCase().includes(propertyType))
         : true;
 
-      return matchesText && matchesType;
+      return matchesLocation && matchesText && matchesType;
     });
 
     renderProperties(filtered);
