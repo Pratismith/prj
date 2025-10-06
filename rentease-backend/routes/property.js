@@ -1,6 +1,6 @@
 // rentease-backend/routes/property.js
 import express from "express";
-import { authMiddleware } from "../middleware/authMiddleware.js";
+import { authMiddleware } from "../middleware/authmiddleware.js";
 import Property from "../models/Property.js";
 import upload from "../middleware/upload.js"; // 👈 for image uploads
 import { v2 as cloudinary } from "cloudinary"; // 👈 add this
