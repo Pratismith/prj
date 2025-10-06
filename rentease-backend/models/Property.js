@@ -21,11 +21,18 @@ const propertySchema = new mongoose.Schema(
     sqFt: { type: String },
     gender: { type: String, enum: ["Male", "Female", "Any", "Family"], default: "Any" },
     furnishing: { type: String },
-   // availability: { type: String, default: "Available" },
+    availability: { type: String, default: "Available" },
+
+    // Homestay-specific fields
+    maxGuests: { type: Number },
+    availabilityDates: {
+      from: { type: Date },
+      to: { type: Date }
+    },
 
     // Contact info
     phone: { type: String },
-    //whatsapp: { type: String },
+    whatsapp: { type: String },
 
     // Media and features
     amenities: [{ type: String }],

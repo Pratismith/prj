@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Homestay | RentEase</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .homestay-form-container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .amenity-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .amenity-checkbox:hover {
+      background: #f3f4f6;
+    }
+
+    .amenity-checkbox input[type="checkbox"] {
+      width: auto;
+      accent-color: #2563eb;
+    }
+
+    .submit-btn {
+      background: #2563eb;
+      color: white;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    }
+
+    .availability-calendar {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      background: #f9fafb;
+    }
+
+    .date-range {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .help-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+
+    .info-box h3 {
+      margin: 0 0 8px 0;
+      color: #1e40af;
+      font-size: 16px;
+    }
+
+    .info-box p {
+      margin: 0;
+      color: #1e40af;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="logo.png" alt="RentEase Logo" class="logo-img">
+        <div>
+          <h3 class="brand-name">MyNest</h3>
+          <p class="brand-tagline">Find Your Perfect Home</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <p class="nav-title">Navigation</p>
+        <ul>
+          <li><a href="home.html"><span class="icon">🔍</span> Search Properties</a></li>
+          <li><a href="add-property.html"><span class="icon">➕</span> Add Property</a></li>
+          <li><a href="my-properties.html"><span class="icon">📋</span> My Properties</a></li>
+          <li><a href="add-homestay.html" class="active"><span class="icon">🏡</span> Add Homestay</a></li>
+          <li><a href="signup.html" id="signup-link"><span class="icon">📝</span> Sign Up</a></li>
+          <li><a href="login.html" id="login-link"><span class="icon">🔑</span> Login</a></li>
+        </ul>
+      </nav>
+
+      <div class="stats">
+        <p class="stats-title">Quick Stats</p>
+        <p><span class="icon">📍</span> Active Cities <span class="highlight blue">25+</span></p>
+        <p><span class="icon">🏢</span> Listed Properties <span class="highlight green">1000+</span></p>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <section class="hero">
+        <h1>🏡 Add Homestay</h1>
+        <p>List your homestay and start welcoming guests</p>
+      </section>
+
+      <div class="homestay-form-container">
+        <div class="info-box">
+          <h3>📋 Homestay Listing Information</h3>
+          <p>Homestays are short-term accommodations perfect for travelers and vacationers. Fill in the details below to list your property.</p>
+        </div>
+
+        <form id="homestayForm" enctype="multipart/form-data">
+          <!-- Basic Information -->
+          <h3 style="margin-bottom: 20px; color: #1f2937;">Basic Information</h3>
+          
+          <div class="form-group">
+            <label for="title">Homestay Name *</label>
+            <input type="text" id="title" name="title" placeholder="e.g., Sunrise Villa, Cozy Mountain Retreat" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="location">Location *</label>
+              <input type="text" id="location" name="location" placeholder="City, Area" required>
+            </div>
+
+            <div class="form-group">
+              <label for="type">Property Type *</label>
+              <select id="type" name="type" required>
+                <option value="Homestay">Homestay</option>
+                <option value="Villa">Villa</option>
+                <option value="Cottage">Cottage</option>
+                <option value="Bungalow">Bungalow</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Pricing -->
+          <h3 style="margin: 30px 0 20px; color: #1f2937;">Pricing</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="price">Price per Night (₹) *</label>
+              <input type="number" id="price" name="price" placeholder="2000" required>
+              <p class="help-text">Set competitive pricing for your homestay</p>
+            </div>
+
+            <div class="form-group">
+              <label for="deposit">Security Deposit (₹)</label>
+              <input type="number" id="deposit" name="deposit" placeholder="5000">
+              <p class="help-text">Optional security deposit</p>
+            </div>
+          </div>
+
+          <!-- Property Details -->
+          <h3 style="margin: 30px 0 20px; color: #1f2937;">Property Details</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="beds">Bedrooms *</label>
+              <input type="number" id="beds" name="beds" placeholder="2" required>
+            </div>
+
+            <div class="form-group">
+              <label for="baths">Bathrooms *</label>
+              <input type="number" id="baths" name="baths" placeholder="2" required>
+            </div>
+
+            <div class="form-group">
+              <label for="sqFt">Area (sq ft)</label>
+              <input type="text" id="sqFt" name="sqFt" placeholder="1200">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="maxGuests">Maximum Guests *</label>
+              <input type="number" id="maxGuests" name="maxGuests" placeholder="4" required>
+            </div>
+
+            <div class="form-group">
+              <label for="furnishing">Furnishing Status *</label>
+              <select id="furnishing" name="furnishing" required>
+                <option value="Fully Furnished">Fully Furnished</option>
+                <option value="Semi-Furnished">Semi-Furnished</option>
+                <option value="Unfurnished">Unfurnished</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group">
+            <label for="description">Description *</label>
+            <textarea id="description" name="description" rows="5" placeholder="Describe your homestay, nearby attractions, house rules, etc." required></textarea>
+          </div>
+
+          <!-- Contact Information -->
+          <h3 style="margin: 30px 0 20px; color: #1f2937;">Contact Information</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" placeholder="9876543210" required>
+            </div>
+
+            <div class="form-group">
+              <label for="whatsapp">WhatsApp Number *</label>
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder="9876543210" required>
+              <p class="help-text">For instant booking inquiries</p>
+            </div>
+          </div>
+
+          <!-- Amenities -->
+          <h3 style="margin: 30px 0 20px; color: #1f2937;">Amenities</h3>
+          
+          <div class="amenities-grid">
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="WiFi">
+              <span>📶 WiFi</span>
+            </label>
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="Parking">
+              <span>🚗 Parking</span>
+            </label>
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="Kitchen">
+              <span>🍳 Kitchen</span>
+            </label>
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="AC">
+              <span>❄️ Air Conditioning</span>
+            </label>
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="TV">
+              <span>📺 TV</span>
+            </label>
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="Laundry">
+              <span>🧺 Laundry</span>
+            </label>
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="Garden">
+              <span>🌳 Garden</span>
+            </label>
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="Swimming Pool">
+              <span>🏊 Swimming Pool</span>
+            </label>
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="Fireplace">
+              <span>🔥 Fireplace</span>
+            </label>
+            <label class="amenity-checkbox">
+              <input type="checkbox" name="amenities" value="BBQ">
+              <span>🍖 BBQ Grill</span>
+            </label>
+          </div>
+
+          <!-- Images -->
+          <h3 style="margin: 30px 0 20px; color: #1f2937;">Property Images</h3>
+          
+          <div class="form-group">
+            <label for="images">Upload Images (Max 5)</label>
+            <input type="file" id="images" name="images" accept="image/*" multiple>
+            <p class="help-text">Upload clear, high-quality images of your homestay</p>
+          </div>
+
+          <!-- Availability -->
+          <h3 style="margin: 30px 0 20px; color: #1f2937;">Availability</h3>
+          
+          <div class="availability-calendar">
+            <div class="form-group">
+              <label for="availability">Current Status *</label>
+              <select id="availability" name="availability" required>
+                <option value="Available">Available Now</option>
+                <option value="Booked">Currently Booked</option>
+                <option value="Seasonal">Seasonal Availability</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Available Date Range (Optional)</label>
+              <div class="date-range">
+                <input type="date" name="availableFrom" placeholder="Available From">
+                <input type="date" name="availableTo" placeholder="Available To">
+              </div>
+              <p class="help-text">Specify when your homestay is available for booking</p>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">🏡 List My Homestay</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="add-homestay.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
