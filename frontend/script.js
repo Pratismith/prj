@@ -46,6 +46,7 @@ const countHeading = document.getElementById("properties-count");
 
 // Function to render properties
 function renderProperties(data) {
+  if (!list || !countHeading) return; // if not on homepage, skip
   list.innerHTML = ""; // clear old cards
 
   if (!data.length) {
