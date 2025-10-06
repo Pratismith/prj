@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   imagePreview.className = "flex flex-wrap gap-2 mt-2";
 
   try {
-    const response = await fetch("http://localhost:4000/api/properties/my-properties", {
+    const response = await fetch("/api/properties/my-properties", {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!confirm("🗑️ Are you sure you want to delete this property?")) return;
 
         try {
-          const res = await fetch(`http://localhost:4000/api/properties/${id}`, {
+          const res = await fetch(`/api/properties/${id}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}` },
           });
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const id = btn.getAttribute("data-id");
 
         try {
-          const res = await fetch(`http://localhost:4000/api/properties/${id}`);
+          const res = await fetch(`/api/properties/${id}`);
           const result = await res.json();
 
           if (!res.ok) {
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       formData.append("existingImages", JSON.stringify(existingImages));
 
       try {
-        const res = await fetch(`http://localhost:4000/api/properties/${id}`, {
+        const res = await fetch(`/api/properties/${id}`, {
           method: "PUT",
           headers: { Authorization: `Bearer ${token}` },
           body: formData,

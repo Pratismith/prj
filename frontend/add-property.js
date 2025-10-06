@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       
       try {
-        const response = await fetch("http://localhost:4000/api/properties/add-property", {
+        const response = await fetch("/api/properties/add-property", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`, // token required for auth

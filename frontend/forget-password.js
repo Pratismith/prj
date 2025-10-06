@@ -4,7 +4,7 @@ document.getElementById("forgotForm").addEventListener("submit", async (e) => {
   
     const email = document.getElementById("forgotEmail").value;
   
-    const res = await fetch("http://localhost:4000/api/forgot-password", {
+    const res = await fetch("/api/forgot-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),

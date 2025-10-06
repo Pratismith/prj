@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // Fetch from backend
-    const res = await fetch(`http://localhost:4000/api/properties/${selectedId}`);
+    const res = await fetch(`/api/properties/${selectedId}`);
     const data = await res.json();
 
     if (!res.ok) {

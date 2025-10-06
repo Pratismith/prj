@@ -5,7 +5,7 @@ let allProperties = []; // store fetched properties for search
 
 async function fetchProperties() {
   try {
-    const res = await fetch("http://localhost:4000/api/properties");
+    const res = await fetch("/api/properties");
     const data = await res.json();
 
     if (data.properties) {
