@@ -2,6 +2,27 @@
 
 A full-stack property rental application with user authentication, property listings, and real-time search functionality.
 
+## ⚠️ IMPORTANT SECURITY NOTICE
+
+**The credentials provided during setup may have been exposed. For production use, you MUST:**
+
+1. **Rotate ALL credentials immediately:**
+   - Create a new MongoDB database user with a new password
+   - Generate a new, strong JWT secret
+   - Create new Gmail app password
+   - Regenerate Cloudinary API keys
+
+2. **Never commit `.env` files to version control**
+   - The `.env` file is in `.gitignore` to prevent accidental commits
+   - Always use environment variables or secure secret management systems
+   - For Replit: use the Secrets tab in the Tools panel
+
+3. **For production deployment:**
+   - Use Replit Secrets or your platform's environment variable system
+   - Enable 2FA on all external services
+   - Regularly rotate credentials
+   - Monitor access logs for suspicious activity
+
 ## Features
 
 - User authentication (signup, login, password recovery)
