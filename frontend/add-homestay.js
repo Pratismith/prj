@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Backend response:", data);
 
       if (response.ok) {
+        // Clear property cache to show new homestay on homepage
+        sessionStorage.removeItem('rentease_properties_cache');
         alert("✅ Homestay added successfully!");
         window.location.href = "my-properties.html";
       } else {

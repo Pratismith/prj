@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Backend response:", data);
   
         if (response.ok) {
+          // Clear property cache to show new property on homepage
+          sessionStorage.removeItem('rentease_properties_cache');
           alert("✅ Property added successfully!");
           window.location.href = "my-properties.html"; // Redirect to My Properties
         } else {

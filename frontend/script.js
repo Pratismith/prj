@@ -2,14 +2,35 @@
 // Property Cards Rendering (Dynamic from API)
 // ==========================
 let allProperties = []; // store fetched properties for search
+const CACHE_KEY = 'rentease_properties_cache';
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 async function fetchProperties() {
+  // Check cache first
+  const cached = sessionStorage.getItem(CACHE_KEY);
+  if (cached) {
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < CACHE_DURATION) {
+      console.log('Using cached properties');
+      allProperties = data;
+      renderProperties(allProperties);
+      return;
+    }
+  }
+
   try {
     const res = await fetch("/api/properties");
     const data = await res.json();
 
     if (data.properties) {
-      allProperties = data.properties; // save for search
+      allProperties = data.properties;
+      
+      // Cache the data
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+        data: allProperties,
+        timestamp: Date.now()
+      }));
+      
       renderProperties(allProperties);
     } else {
       renderProperties([]);
@@ -59,10 +80,14 @@ function renderProperties(data) {
           }
         </div>
         <div class="actions">
-          <button class="btn view" data-link="property-details.html" data-id="${p._id}">
+          <button class="btn view" data-link="property-details.html" data-id="${p._id}" 
+            aria-label="View details for ${p.title}">
             <span>👁</span> View Details
           </button>
-          <button class="btn call" data-link="tel:+919999999999"><span>📞</span></button>
+          <button class="btn call" data-link="tel:${p.phone || '+919999999999'}" 
+            aria-label="Call owner of ${p.title}">
+            <span>📞</span>
+          </button>
         </div>
       </div>
     `;
@@ -105,6 +130,22 @@ if (closeSearch) {
   });
 }
 
+// Keyboard navigation - ESC to close modal
+if (searchModal) {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && searchModal.getAttribute("aria-hidden") === "false") {
+      searchModal.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  // Click outside modal to close
+  searchModal.addEventListener("click", (e) => {
+    if (e.target === searchModal) {
+      searchModal.setAttribute("aria-hidden", "true");
+    }
+  });
+}
+
 // Handle form submit
 const searchForm = document.getElementById("searchForm");
 if (searchForm) {
@@ -127,7 +168,7 @@ if (searchForm) {
         : true;
 
       const matchesType = propertyType
-        ? (p.type && p.type.toLowerCase().includes(propertyType))
+        ? (p.type && p.type.toLowerCase().includes(propertyType.toLowerCase()))
         : true;
 
       return matchesLocation && matchesText && matchesType;

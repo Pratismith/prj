@@ -96,6 +96,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
           }
 
+          // Clear property cache to reflect deletion on homepage
+          sessionStorage.removeItem('rentease_properties_cache');
           alert(result.message || "Property deleted");
           window.location.reload();
         } catch (err) {
@@ -208,6 +210,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           return;
         }
 
+        // Clear property cache to reflect updates on homepage
+        sessionStorage.removeItem('rentease_properties_cache');
         alert(result.message || "Property updated");
         modal.classList.add("hidden");
         window.location.reload();
